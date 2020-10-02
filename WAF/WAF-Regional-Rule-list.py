@@ -26,15 +26,14 @@ def list_webacl_rules(WebACLd, service_name, region):
     ip_address = ip_sets['IPSets']
 
     for ipset in ip_address:
-        if 'prd' in ipset['Name']:
-            print(f"Rule Name: {ipset['Name']}")
-            result = client.get_ip_set(IPSetId=ipset['IPSetId'])
-            if descriptors := result['IPSet']['IPSetDescriptors']:
-                for descriptor in descriptors:
-                    print(
-                        f"{descriptor['Type']}: {descriptor['Value']}")
-            else:
-                print("**Empty**")
+        print(f"Rule Name: {ipset['Name']}")
+        result = client.get_ip_set(IPSetId=ipset['IPSetId'])
+        if descriptors := result['IPSet']['IPSetDescriptors']:
+            for descriptor in descriptors:
+                print(
+                    f"{descriptor['Type']}: {descriptor['Value']}")
+        else:
+            print("**Empty**")
 
 # invoke function
 list_webacl_rules(
