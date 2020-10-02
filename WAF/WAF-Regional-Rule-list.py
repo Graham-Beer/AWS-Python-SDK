@@ -10,17 +10,13 @@ def set_boto3_client(service_name, region):
     return client
 
 
-def list_webacl_rules(WebACLd, service_name, region):
+def list_webacl_rules(service_name='waf-regional', region):
     """
     List WebAcl rules and IP address for desired WebAcl.
     Provide WebAcl id to list for rules.
     """
 
     client = set_boto3_client(service_name=service_name, region=region)
-
-    response = client.get_web_acl(WebACLId=WebACLd)
-    web_acl = response['WebACL']
-    print(f"Web ACL Name:\n{web_acl['Name']}\n")
 
     ip_sets = client.list_ip_sets()
     ip_address = ip_sets['IPSets']
@@ -36,7 +32,4 @@ def list_webacl_rules(WebACLd, service_name, region):
             print("**Empty**")
 
 # invoke function
-list_webacl_rules(
-    WebACLd='',
-    service_name='waf-regional',
-    region='eu-west-1')
+list_webacl_rules(region='eu-west-1')
