@@ -10,7 +10,7 @@ def set_boto3_client(service_name, region):
     return client
 
 
-def list_webacl_rules(service_name='waf-regional', region):
+def list_webacl_rules(region, service_name='waf-regional'):
     """
     List WebAcl rules and IP address for desired WebAcl.
     Provide WebAcl id to list for rules.
